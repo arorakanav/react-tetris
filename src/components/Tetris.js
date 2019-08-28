@@ -52,7 +52,16 @@ const Tetris = () => {
     }
   }
 
+  const keyUp = ({ keyCode }) => {
+    if (!gameOver) {
+      if (keyCode === 40) {
+        setDroipTime(1000);
+      }
+    }
+  }
+
   const dropPlayer = () => {
+    setDroipTime(null);
     drop();
   }
 
@@ -75,7 +84,11 @@ const Tetris = () => {
   }, dropTime)
 
   return (
-    <StyledTetrisWrapper role="button" tabIndex="0" onKeyDown={e => move(e)}>
+    <StyledTetrisWrapper role="button" 
+      tabIndex="0" 
+      onKeyDown={e => move(e)}
+      onKeyUp={keyUp}
+    >
       <StyledTetris>
         <Stage stage={stage}></Stage>
         <aside>
